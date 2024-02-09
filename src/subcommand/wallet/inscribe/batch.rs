@@ -292,8 +292,7 @@ impl Batch {
     };
 
     // log total postage
-    log::info!("Total postage1: {}", total_postage);
-    println!("Total postage2: {}", total_postage);
+    println!("Total postage: {}", total_postage.to_sat());
 
     let mut reveal_inputs = vec![OutPoint::null()];
     let mut reveal_outputs = self
@@ -336,6 +335,11 @@ impl Batch {
       &reveal_script,
     );
 
+
+    println!("Reveal fee: {}", reveal_fee.to_sat());
+
+    println!("Commit fee: {}", total_postage.to_sat() + reveal_fee.to_sat());
+
     let unsigned_commit_tx = TransactionBuilder::new(
       satpoint,
       wallet_inscriptions,
@@ -369,6 +373,10 @@ impl Batch {
       reveal_outputs.clone(),
       &reveal_script,
     );
+
+    println!("Reveal tx weight: {}", reveal_tx.weight());
+    println!("Reveal tx vsize: {}", reveal_tx.vsize());
+    println!("Reveal tx fee: {}", _fee);
 
     if reveal_tx.output[commit_input].value
       < reveal_tx.output[commit_input]
