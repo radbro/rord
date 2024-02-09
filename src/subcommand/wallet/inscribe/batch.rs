@@ -44,6 +44,8 @@ impl Batch {
     runic_utxos: BTreeSet<OutPoint>,
     utxos: &BTreeMap<OutPoint, Amount>,
   ) -> SubcommandResult {
+    println!("STARTING!!!4");
+
     let wallet_inscriptions = index.get_inscriptions(utxos)?;
 
     let commit_tx_change = [
@@ -288,6 +290,10 @@ impl Batch {
         self.postage * u64::try_from(self.inscriptions.len()).unwrap()
       }
     };
+
+    // log total postage
+    log::info!("Total postage1: {}", total_postage);
+    println!("Total postage2: {}", total_postage);
 
     let mut reveal_inputs = vec![OutPoint::null()];
     let mut reveal_outputs = self
