@@ -167,6 +167,7 @@ impl TransactionBuilder {
       }
       _ => (),
     }
+    println!("build transaction 1");
 
     self
       .select_outgoing()?
@@ -179,6 +180,7 @@ impl TransactionBuilder {
   }
 
   fn select_outgoing(mut self) -> Result<Self> {
+    println!("select outgoing 1");
     let dust_limit = self
       .unused_change_addresses
       .last()
@@ -223,6 +225,7 @@ impl TransactionBuilder {
   }
 
   fn align_outgoing(mut self) -> Self {
+    println!("align outgoing 1");
     assert_eq!(self.outputs.len(), 1, "invariant: only one output");
 
     assert_eq!(
@@ -253,6 +256,7 @@ impl TransactionBuilder {
   }
 
   fn pad_alignment_output(mut self) -> Result<Self> {
+    println!("pad alignment output 1");
     if self.outputs[0].0 == self.recipient {
       tprintln!("no alignment output");
     } else {
@@ -284,6 +288,7 @@ impl TransactionBuilder {
   }
 
   fn add_value(mut self) -> Result<Self> {
+    println!("add value 1");
     let estimated_fee = self.estimate_fee();
 
     let min_value = match self.target {
@@ -327,6 +332,7 @@ impl TransactionBuilder {
   }
 
   fn strip_value(mut self) -> Self {
+    println!("strip value 1");
     let sat_offset = self.calculate_sat_offset();
 
     let total_output_amount = self
@@ -378,6 +384,7 @@ impl TransactionBuilder {
   }
 
   fn deduct_fee(mut self) -> Self {
+    println!("deduct fee 1");
     let sat_offset = self.calculate_sat_offset();
 
     let fee = self.estimate_fee();
@@ -454,6 +461,7 @@ impl TransactionBuilder {
   }
 
   fn build(self) -> Result<Transaction> {
+    println!("build 1");
     let recipient = self.recipient.script_pubkey();
     let transaction = Transaction {
       version: 2,
