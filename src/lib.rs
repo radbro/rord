@@ -102,7 +102,7 @@ mod test;
 #[cfg(test)]
 use self::test::*;
 
-macro_rules! println {
+macro_rules! tprintln {
     ($($arg:tt)*) => {
 
       if cfg!(test) {
