@@ -214,7 +214,9 @@ fn gracefully_shutdown_indexer() {
 pub fn main() {
   env_logger::init();
 
+  log::info!("STARTING!!!");
   log::warn!("STARTING!!!");
+  println!("STARTING!!!");
 
   ctrlc::set_handler(move || {
     if SHUTTING_DOWN.fetch_or(true, atomic::Ordering::Relaxed) {
