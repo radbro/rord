@@ -723,6 +723,8 @@ impl TransactionBuilder {
 
       if is_preference_and_closer || not_preference_but_closer || newly_meets_preference {
         best_match = Some((*utxo, current_value))
+      } else {
+        println!("skipping utxo {} worth {}", utxo, current_value);
       }
     }
 
